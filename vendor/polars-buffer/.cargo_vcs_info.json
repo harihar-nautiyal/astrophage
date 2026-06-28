@@ -1,6 +1,0 @@
-{
-  "git": {
-    "sha1": "583ec858921f6079538504476eeb9416dea52501"
-  },
-  "path_in_vcs": "crates/polars-buffer"
-}
