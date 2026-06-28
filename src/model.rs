@@ -1,13 +1,11 @@
-//! Exoplanet classification model
-//!
-//! Uses custom Random Forest implementation
-//! for multi-class classification of KOI signals.
+//! Exoplanet classification model, use custom Random Forest implementation for multi-class classification of KOI signals.
 
 use crate::decision_tree::RandomForest;
 use crate::features::ProcessedDataset;
 use anyhow::{Result, anyhow};
 use ndarray::{Array1, Array2};
 use std::collections::HashMap;
+use tracing::info;
 
 pub struct ExoplanetClassifier {
     forest: Option<RandomForest>,
@@ -43,14 +41,15 @@ impl ExoplanetClassifier {
         let min_samples_split = 2;
         let min_samples_leaf = 1;
 
-        println!("   Hyperparameters:");
-        println!("     - Trees: {}", n_trees);
-        println!("     - Max depth: {}", max_depth);
-        println!("     - Min samples split: {}", min_samples_split);
-        println!("     - Min samples leaf: {}", min_samples_leaf);
-        println!(
-            "     - Class weights: CONFIRMED={:.2}, CANDIDATE={:.2}, FALSE_POS={:.2}",
-            self.class_weights[&0], self.class_weights[&1], self.class_weights[&2]
+        info!(
+            "Hyperparameters - Trees: {}, Max depth: {}, Min sampling split: {}, Min samples leaf: {}, Class weights: CONFIRMED={:.2}, CANDIDATE={:.2}, FALSE_POS={:.2}",
+            n_trees,
+            max_depth,
+            min_samples_split,
+            min_samples_leaf,
+            self.class_weights[&0],
+            self.class_weights[&1],
+            self.class_weights[&2]
         );
 
         let mut forest = RandomForest::new(
@@ -75,7 +74,7 @@ impl ExoplanetClassifier {
         self.feature_importance = feature_importance;
         self.forest = Some(forest);
 
-        println!("   ✓ Model training complete!");
+        info!("Model training complete!");
 
         Ok(())
     }

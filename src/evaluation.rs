@@ -137,7 +137,7 @@ impl<'a> ModelEvaluator<'a> {
                 .filter(|&c| c != class)
                 .map(|c| metrics.confusion_matrix[[class, c]] as f64)
                 .sum();
-            let support = metrics.confusion_matrix.row(class).sum() as usize;
+            let support = metrics.confusion_matrix.row(class).sum();
 
             let precision = if tp + fp > 0.0 { tp / (tp + fp) } else { 0.0 };
             let recall = if tp + fn_ > 0.0 { tp / (tp + fn_) } else { 0.0 };
