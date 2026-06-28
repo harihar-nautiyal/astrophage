@@ -11,6 +11,9 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
+  # ───────────────────────────────────────────────
+  # 1. Code Quality & Tests
+  # ───────────────────────────────────────────────
   check:
     name: Check & Lint
     runs-on: ubuntu-latest
@@ -19,8 +22,15 @@ jobs:
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
-        with:
-          components: rustfmt, clippy
+
+      # FIX: Explicitly set stable as default and install components
+      # The runner may have nightly pre-installed, so we force stable.
+      - name: Install rustfmt & clippy
+        run: |
+          rustup default stable
+          rustup component add rustfmt clippy
+          rustc --version
+          cargo --version
 
       - name: Cache Cargo dependencies
         uses: Swatinem/rust-cache@v2
@@ -36,6 +46,9 @@ jobs:
       - name: Run tests
         run: cargo test --verbose
 
+  # ───────────────────────────────────────────────
+  # 2. Build Release Binaries (Multi-Platform)
+  # ───────────────────────────────────────────────
   build:
     name: Build Release
     needs: check
@@ -99,6 +112,9 @@ jobs:
           name: ${{ matrix.name }}
           path: ${{ matrix.name }}.tar.gz
 
+  # ───────────────────────────────────────────────
+  # 3. Create GitHub Release (only on tags)
+  # ───────────────────────────────────────────────
   release:
     name: Create Release
     needs: build
