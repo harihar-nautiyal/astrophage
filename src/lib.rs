@@ -9,3 +9,4 @@ pub mod features;
 pub mod logger;
 pub mod model;
 pub mod report;
+pub mod two_stage_model;

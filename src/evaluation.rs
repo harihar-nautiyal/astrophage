@@ -5,7 +5,8 @@
 //! - Confusion Matrix
 //! - Per-class metrics
 
-use crate::{features::ProcessedDataset, model::ExoplanetClassifier};
+use crate::features::ProcessedDataset;
+use crate::two_stage_model::TwoStageClassifier;
 use anyhow::{Result, anyhow};
 use ndarray::{Array1, Array2};
 use std::collections::HashMap;
@@ -13,28 +14,13 @@ use std::collections::HashMap;
 /// Evaluation metrics for the classifier
 #[derive(Debug, Clone)]
 pub struct EvaluationMetrics {
-    /// Overall accuracy
     pub accuracy: f64,
-
-    /// Per-class precision
     pub precision: HashMap<u8, f64>,
-
-    /// Per-class recall
     pub recall: HashMap<u8, f64>,
-
-    /// Per-class F1-score
     pub f1_score: HashMap<u8, f64>,
-
-    /// Macro-averaged F1
     pub macro_f1: f64,
-
-    /// Weighted-averaged F1
     pub weighted_f1: f64,
-
-    /// Confusion matrix [true_class][predicted_class]
     pub confusion_matrix: Array2<usize>,
-
-    /// Number of samples
     pub n_samples: usize,
 }
 
@@ -52,12 +38,8 @@ impl EvaluationMetrics {
         }
     }
 
-    /// Display formatted metrics
     pub fn display(&self) {
-        println!(
-            "
-╔══════════════════════════════════════════════════════════════╗"
-        );
+        println!("\n╔══════════════════════════════════════════════════════════════╗");
         println!("║                    EVALUATION RESULTS                          ║");
         println!("╚══════════════════════════════════════════════════════════════╝");
         println!();
@@ -108,23 +90,25 @@ impl EvaluationMetrics {
     }
 }
 
-/// Model evaluator
+/// Model evaluator for TwoStageClassifier
 pub struct ModelEvaluator<'a> {
-    classifier: &'a ExoplanetClassifier,
+    classifier: &'a TwoStageClassifier,
     test_data: &'a ProcessedDataset,
 }
 
 impl<'a> ModelEvaluator<'a> {
-    pub fn new(classifier: &'a ExoplanetClassifier, test_data: &'a ProcessedDataset) -> Self {
+    pub fn new(classifier: &'a TwoStageClassifier, test_data: &'a ProcessedDataset) -> Self {
         Self {
             classifier,
             test_data,
         }
     }
 
-    /// Evaluate model performance on test set
     pub fn evaluate(&self) -> Result<EvaluationMetrics> {
-        let predictions = self.classifier.predict(self.test_data.features())?;
+        let predictions = self
+            .classifier
+            .predict(self.test_data.features())
+            .map_err(|e| anyhow!("Prediction error: {}", e))?;
         let true_labels = self.test_data.labels();
 
         let n = predictions.len();
