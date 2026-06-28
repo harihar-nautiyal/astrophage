@@ -7,7 +7,6 @@
 //! - Astrophysical interpretation
 
 use crate::evaluation::EvaluationMetrics;
-use crate::features::FeatureEngineer;
 use crate::two_stage_model::TwoStageClassifier;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -70,7 +69,6 @@ pub struct AstrophysicalInsight {
 pub fn generate_report(
     metrics: &EvaluationMetrics,
     classifier: &TwoStageClassifier,
-    engineer: &FeatureEngineer,
 ) -> Result<(), std::io::Error> {
     fs::create_dir_all("output")?;
 

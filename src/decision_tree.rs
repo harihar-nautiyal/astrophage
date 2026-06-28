@@ -6,11 +6,10 @@
 //! 3. Reduced default trees (20) for faster iteration
 //! 4. Progress indicators
 
-use crate::features::ProcessedDataset;
-use anyhow::{Result, anyhow};
+use anyhow::Result;
 use ndarray::{Array1, Array2};
+use rand::RngExt;
 use rand::seq::SliceRandom;
-use rand::{Rng, RngExt};
 use std::collections::HashMap;
 use std::time::Instant;
 use tracing::info;

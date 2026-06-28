@@ -8,7 +8,7 @@
 use crate::features::ProcessedDataset;
 use crate::two_stage_model::TwoStageClassifier;
 use anyhow::{Result, anyhow};
-use ndarray::{Array1, Array2};
+use ndarray::Array2;
 use std::collections::HashMap;
 
 /// Evaluation metrics for the classifier

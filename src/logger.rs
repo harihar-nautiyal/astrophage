@@ -4,7 +4,7 @@ use tracing_subscriber::{filter::LevelFilter, fmt, prelude::*, registry::Registr
 pub struct Logger {}
 
 impl Logger {
-    pub fn init(trace: bool) {
+    pub async fn init(trace: bool) {
         let file_appender =
             RollingFileAppender::new(Rotation::HOURLY, "./.astrophage/logs", "ap.log");
         let (non_blocking_file, _guard) = tracing_appender::non_blocking(file_appender);

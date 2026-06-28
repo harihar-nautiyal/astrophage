@@ -1,3 +1,5 @@
+//! Data loading and preprocessing utilities for the KOI dataset.
+
 use anyhow::Result;
 use ndarray::{Array1, Array2};
 use std::collections::HashMap;
@@ -21,8 +23,7 @@ impl KoiDataset {
             .with_has_header(true)
             .try_into_reader_with_file_path(Some("data/koi_dataset.csv".into()))
             .unwrap()
-            .finish()
-            .unwrap();
+            .finish()?;
 
         info!(
             "Loaded DataFrame: {} rows × {} columns",
@@ -91,10 +92,9 @@ impl KoiDataset {
         }
 
         let feature_df = DataFrame::new_infer_height(casted_columns)?;
-
         let features: Array2<f64> = feature_df.to_ndarray::<Float64Type>(IndexOrder::C)?;
 
-        println!(
+        info!(
             "Feature matrix: {} × {}",
             features.nrows(),
             features.ncols()

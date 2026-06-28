@@ -15,24 +15,24 @@
     "model_type": "Two-Stage Random Forest"
   },
   "metrics": {
-    "accuracy": 0.9429618001046572,
-    "macro_f1": 0.923614904417504,
-    "weighted_f1": 0.943011787022712,
+    "accuracy": 0.945054945054945,
+    "macro_f1": 0.9263511130495695,
+    "weighted_f1": 0.9450722527040195,
     "per_class": {
+      "CANDIDATE": {
+        "precision": 0.8842105263157894,
+        "recall": 0.850632911392405,
+        "f1_score": 0.8670967741935484
+      },
       "FALSE_POSITIVE": {
         "precision": 0.9968553459119497,
         "recall": 0.983453981385729,
         "f1_score": 0.9901093180635085
       },
       "CONFIRMED": {
-        "precision": 0.8958333333333334,
-        "recall": 0.9398907103825137,
-        "f1_score": 0.9173333333333333
-      },
-      "CANDIDATE": {
-        "precision": 0.8792650918635171,
-        "recall": 0.8481012658227848,
-        "f1_score": 0.8634020618556701
+        "precision": 0.8994800693240901,
+        "recall": 0.9453551912568307,
+        "f1_score": 0.9218472468916519
       }
     }
   },
@@ -40,91 +40,91 @@
     {
       "rank": 1,
       "feature_name": "fpflag_sum",
-      "importance_score": 0.28813934063107766,
+      "importance_score": 0.29175864778161437,
       "astrophysical_meaning": "Sum of all false positive flags. Higher values indicate stronger suspicion of non-planetary signal."
     },
     {
       "rank": 2,
-      "feature_name": "koi_fpflag_ss",
-      "importance_score": 0.064626338250508,
-      "astrophysical_meaning": "Stellar Eclipse flag. Non-zero indicates secondary eclipse detected (binary star)."
+      "feature_name": "koi_fpflag_co",
+      "importance_score": 0.06834088436559071,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 3,
       "feature_name": "koi_max_mult_ev",
-      "importance_score": 0.06376389498510779,
+      "importance_score": 0.06296361386506599,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 4,
-      "feature_name": "koi_model_snr",
-      "importance_score": 0.061171285446222703,
-      "astrophysical_meaning": "Signal-to-noise ratio of the transit model fit. Higher SNR = more reliable detection."
-    },
-    {
-      "rank": 5,
       "feature_name": "koi_fpflag_nt",
-      "importance_score": 0.05886060663983898,
+      "importance_score": 0.06239983950497931,
       "astrophysical_meaning": "Not Transit-like flag. Non-zero indicates the signal shape doesn't match a planet transit."
     },
     {
+      "rank": 5,
+      "feature_name": "koi_model_snr",
+      "importance_score": 0.05963540155631576,
+      "astrophysical_meaning": "Signal-to-noise ratio of the transit model fit. Higher SNR = more reliable detection."
+    },
+    {
       "rank": 6,
-      "feature_name": "koi_fpflag_co",
-      "importance_score": 0.05436039401592725,
-      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+      "feature_name": "koi_fpflag_ss",
+      "importance_score": 0.04501107604291278,
+      "astrophysical_meaning": "Stellar Eclipse flag. Non-zero indicates secondary eclipse detected (binary star)."
     },
     {
       "rank": 7,
-      "feature_name": "snr_x_prad",
-      "importance_score": 0.038542222557702156,
-      "astrophysical_meaning": "Interaction between signal-to-noise ratio and planetary radius. Large planets should have strong SNR."
+      "feature_name": "koi_prad",
+      "importance_score": 0.043686277671460494,
+      "astrophysical_meaning": "Planetary radius in Earth radii. Values > 15 suggest stellar companion, not planet."
     },
     {
       "rank": 8,
-      "feature_name": "koi_count",
-      "importance_score": 0.03753192334381305,
-      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+      "feature_name": "snr_x_prad",
+      "importance_score": 0.03901432543104327,
+      "astrophysical_meaning": "Interaction between signal-to-noise ratio and planetary radius. Large planets should have strong SNR."
     },
     {
       "rank": 9,
-      "feature_name": "koi_prad",
-      "importance_score": 0.03719129800366941,
-      "astrophysical_meaning": "Planetary radius in Earth radii. Values > 15 suggest stellar companion, not planet."
+      "feature_name": "koi_count",
+      "importance_score": 0.03244665945169851,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 10,
       "feature_name": "koi_ror",
-      "importance_score": 0.030500293870851163,
+      "importance_score": 0.029596908375136628,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 11,
-      "feature_name": "koi_dor",
-      "importance_score": 0.023227175039446636,
-      "astrophysical_meaning": "Astrophysical feature contributing to classification"
-    },
-    {
-      "rank": 12,
       "feature_name": "koi_prad_squared",
-      "importance_score": 0.020704901166624032,
+      "importance_score": 0.027525449794694873,
       "astrophysical_meaning": "Non-linear planetary radius effect. Captures threshold where objects become too large to be planets."
     },
     {
-      "rank": 13,
+      "rank": 12,
       "feature_name": "log_period",
-      "importance_score": 0.02039874949362344,
+      "importance_score": 0.023929657987092446,
       "astrophysical_meaning": "Logarithmic orbital period. Planetary orbits follow log-normal distribution."
     },
     {
-      "rank": 14,
-      "feature_name": "koi_fpflag_ec",
-      "importance_score": 0.019851295875729306,
+      "rank": 13,
+      "feature_name": "koi_dor",
+      "importance_score": 0.023312554237691192,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 14,
+      "feature_name": "koi_period",
+      "importance_score": 0.016277151466527882,
+      "astrophysical_meaning": "Orbital period in days. Very short periods may indicate stellar binary."
     },
     {
       "rank": 15,
       "feature_name": "koi_max_sngle_ev",
-      "importance_score": 0.018334669839846655,
+      "importance_score": 0.015403128782097368,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     }
   ],

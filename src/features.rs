@@ -1,21 +1,15 @@
-//! Feature engineering for KOI classification — with astrophysical derived features
-//!
-//! Handles:
-//! - Feature selection (25 base features)
-//! - Missing value imputation
-//! - Feature scaling
-//! - DERIVED FEATURES: astrophysical intuition encoded as new columns
-//! - Train/test splitting
+//! Feature engineering for KOI classification
 
 use crate::data::KoiDataset;
-use anyhow::{Result, anyhow};
+use anyhow::Result;
 use ndarray::{Array1, Array2};
 use rand::SeedableRng;
 use rand::rngs::StdRng;
 use rand::seq::SliceRandom;
 use std::collections::HashMap;
+use tracing::info;
 
-/// Base features selected for exoplanet classification
+/// I am using total 32 features from the dataset to train the model
 pub const BASE_FEATURES: &[&str] = &[
     "koi_period",
     "koi_duration",
@@ -48,7 +42,7 @@ pub const BASE_FEATURES: &[&str] = &[
     "koi_smass",
 ];
 
-/// Derived features that capture astrophysical intuition
+/// These are derived features to improve accuracy of the model
 pub const DERIVED_FEATURES: &[(&str, &str)] = &[
     ("koi_prad_squared", "koi_prad^2 — non-linear radius effect"),
     (
@@ -105,7 +99,6 @@ impl ProcessedDataset {
 
     /// Split dataset into train and test sets (stratified)
     pub fn split(&self, test_ratio: f64, seed: u64) -> (ProcessedDataset, ProcessedDataset) {
-        let n = self.n_samples();
         let n_classes = 3;
 
         let mut class_indices: Vec<Vec<usize>> = vec![Vec::new(); n_classes];
@@ -175,7 +168,7 @@ impl FeatureEngineer {
 
     /// Process raw dataset into model-ready features
     pub fn process(&mut self, dataset: &KoiDataset) -> Result<ProcessedDataset> {
-        println!("   Selecting {} base features...", self.base_features.len());
+        info!("   Selecting {} base features...", self.base_features.len());
 
         let mut selected_indices = Vec::new();
         let mut selected_names = Vec::new();
@@ -187,8 +180,8 @@ impl FeatureEngineer {
             }
         }
 
-        println!(
-            "   ✓ Found {} of {} base features",
+        info!(
+            "Found {} of {} base features",
             selected_indices.len(),
             self.base_features.len()
         );
@@ -203,14 +196,14 @@ impl FeatureEngineer {
             }
         }
 
-        println!("   Imputing missing values with column medians...");
+        info!("Imputing missing values with column medians...");
         Self::impute_missing(&mut features);
 
-        println!("   Standardizing features (z-score normalization)...");
+        info!("Standardizing features (z-score normalization)...");
         self.standardize(&mut features);
 
-        println!(
-            "   Computing {} derived astrophysical features...",
+        info!(
+            "Computing {} derived astrophysical features...",
             DERIVED_FEATURES.len()
         );
         let derived = self.compute_derived_features(&features, &selected_names);
@@ -232,8 +225,8 @@ impl FeatureEngineer {
             all_names.push(name.to_string());
         }
 
-        println!(
-            "   ✓ Total features: {} ({} base + {} derived)",
+        info!(
+            "Total features: {} ({} base + {} derived)",
             all_names.len(),
             n_base,
             derived.ncols()
