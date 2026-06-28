@@ -6,10 +6,11 @@
 [![Rust](https://img.shields.io/badge/Rust-1.85+-orange?logo=rust)](https://www.rust-lang.org/)
 [![Polars](https://img.shields.io/badge/Polars-DataFrame-brightgreen)](https://pola.rs/)
 [![Accuracy](https://img.shields.io/badge/Accuracy-94.81%25-success)]()
-[![Colab](https://img.shields.io/badge/Open-In-Colab)](https://colab.research.google.com/github/harihar-nautiyal/astrophage/blob/main/Astrophage_Colab.ipynb)
+[![Open](https://img.shields.io/badge/Open-Colab-orange)](https://colab.research.google.com/github/harihar-nautiyal/astrophage/blob/main/Astrophage_Colab.ipynb)
 [![Documentation](https://img.shields.io/badge/Docs-astrophage.hariharnautiyal.com-9cf)](https://astrophage.hariharnautiyal.com)
 
-📖 **Full Documentation:** [https://astrophage.hariharnautiyal.com](https://astrophage.hariharnautiyal.com)
+**Full Documentation:** [https://astrophage.hariharnautiyal.com](https://astrophage.hariharnautiyal.com)
+**Open in Colab:** [https://colab.research.google.com/github/harihar-nautiyal/astrophage/blob/main/Astrophage_Colab.ipynb](https://colab.research.google.com/github/harihar-nautiyal/astrophage/blob/main/Astrophage_Colab.ipynb)
 
 ---
 

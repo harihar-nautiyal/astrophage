@@ -1,11 +1,12 @@
 # 🪐 Astrophage
 
-> **Two-Stage Random Forest Classifier for NASA Kepler Object of Interest (KOI) Exoplanet Validation**
+> **Two-Stage Random Forest Classifier Model for NASA Kepler Object of Interest (KOI) Exoplanet Validation**
 
 [![Hackathon](https://img.shields.io/badge/Celesta-India%20High%20School%20Exoplanet%20Data%20Challenge%202026-blue)](https://celesta-exoplanet-challenge.devpost.com/)
 [![Rust](https://img.shields.io/badge/Rust-1.85+-orange?logo=rust)](https://www.rust-lang.org/)
 [![Polars](https://img.shields.io/badge/Polars-DataFrame-brightgreen)](https://pola.rs/)
 [![Accuracy](https://img.shields.io/badge/Accuracy-94.81%25-success)]()
+[![Open](https://img.shields.io/badge/Open-Colab-orange)](https://colab.research.google.com/github/harihar-nautiyal/astrophage/blob/main/Astrophage_Colab.ipynb)
 
 ---
 
