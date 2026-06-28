@@ -3,210 +3,210 @@
   "version": "0.1.0",
   "hackathon": "Celesta - India High School Exoplanet Data Challenge 2026",
   "summary": {
-    "total_samples": 24,
+    "total_samples": 1912,
     "n_features": 0,
     "n_classes": 3,
     "class_distribution": {
+      "FALSE_POSITIVE": 4839,
       "CANDIDATE": 1978,
-      "CONFIRMED": 2747,
-      "FALSE_POSITIVE": 4839
+      "CONFIRMED": 2747
     },
     "model_type": "Random Forest"
   },
   "metrics": {
-    "accuracy": 0.4583333333333333,
-    "macro_f1": 0.20952380952380953,
-    "weighted_f1": 0.39285714285714285,
+    "accuracy": 0.9246861924686193,
+    "macro_f1": 0.8939848007867987,
+    "weighted_f1": 0.9244773888538189,
     "per_class": {
-      "CONFIRMED": {
-        "precision": 0.55,
-        "recall": 0.7333333333333333,
-        "f1_score": 0.6285714285714286
-      },
       "CANDIDATE": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1_score": 0.0
+        "precision": 0.8314285714285714,
+        "recall": 0.782258064516129,
+        "f1_score": 0.8060941828254847
       },
       "FALSE_POSITIVE": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1_score": 0.0
+        "precision": 0.9929506545820745,
+        "recall": 0.9830508474576272,
+        "f1_score": 0.9879759519038077
+      },
+      "CONFIRMED": {
+        "precision": 0.8629173989455184,
+        "recall": 0.9143389199255121,
+        "f1_score": 0.8878842676311032
       }
     }
   },
   "feature_importance": [
     {
       "rank": 1,
-      "feature_name": "koi_count",
-      "importance_score": 0.15479411145427768,
-      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+      "feature_name": "koi_fpflag_nt",
+      "importance_score": 0.17645858388008118,
+      "astrophysical_meaning": "Not Transit-like flag. Non-zero indicates the signal shape doesn't match a planet transit."
     },
     {
       "rank": 2,
-      "feature_name": "koi_duration",
-      "importance_score": 0.12801493144497833,
-      "astrophysical_meaning": "Transit duration in hours. Planets have short, consistent durations."
+      "feature_name": "koi_fpflag_co",
+      "importance_score": 0.15405625565693504,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 3,
-      "feature_name": "koi_period",
-      "importance_score": 0.125224179534321,
-      "astrophysical_meaning": "Orbital period in days. Very short periods may indicate stellar binary."
+      "feature_name": "koi_fpflag_ss",
+      "importance_score": 0.14004619054047288,
+      "astrophysical_meaning": "Stellar Eclipse flag. Non-zero indicates secondary eclipse detected (binary star)."
     },
     {
       "rank": 4,
-      "feature_name": "koi_insol",
-      "importance_score": 0.12177482285447022,
-      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+      "feature_name": "koi_model_snr",
+      "importance_score": 0.11366664482935011,
+      "astrophysical_meaning": "Signal-to-noise ratio of the transit model fit. Higher SNR = more reliable detection."
     },
     {
       "rank": 5,
-      "feature_name": "koi_teq",
-      "importance_score": 0.11122132792135392,
-      "astrophysical_meaning": "Equilibrium temperature. Extremely high values suggest stellar companion."
-    },
-    {
-      "rank": 6,
-      "feature_name": "koi_ingress",
-      "importance_score": 0.09462652363661217,
+      "feature_name": "koi_max_mult_ev",
+      "importance_score": 0.06080919490241367,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
+      "rank": 6,
+      "feature_name": "koi_prad",
+      "importance_score": 0.05303150362122241,
+      "astrophysical_meaning": "Planetary radius in Earth radii. Values > 15 suggest stellar companion, not planet."
+    },
+    {
       "rank": 7,
-      "feature_name": "koi_depth",
-      "importance_score": 0.0905514771663508,
-      "astrophysical_meaning": "Fractional flux decrease during transit. Planets have small, consistent depths; binaries have large, variable depths."
+      "feature_name": "koi_ror",
+      "importance_score": 0.04829275451969062,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 8,
       "feature_name": "koi_fpflag_ec",
-      "importance_score": 0.07644050070281742,
+      "importance_score": 0.04413783817377637,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 9,
-      "feature_name": "koi_incl",
-      "importance_score": 0.039088054310141306,
-      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+      "feature_name": "koi_depth",
+      "importance_score": 0.02970561028069566,
+      "astrophysical_meaning": "Fractional flux decrease during transit. Planets have small, consistent depths; binaries have large, variable depths."
     },
     {
       "rank": 10,
-      "feature_name": "koi_sma",
-      "importance_score": 0.03734435791650219,
+      "feature_name": "koi_dor",
+      "importance_score": 0.02341867437626126,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 11,
-      "feature_name": "koi_impact",
-      "importance_score": 0.015862761333346326,
-      "astrophysical_meaning": "Impact parameter. Values > 1 are physically impossible for transits."
+      "feature_name": "koi_max_sngle_ev",
+      "importance_score": 0.022235180051449067,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 12,
-      "feature_name": "koi_ror",
-      "importance_score": 0.0050569517248285276,
-      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+      "feature_name": "koi_period",
+      "importance_score": 0.019988401028983978,
+      "astrophysical_meaning": "Orbital period in days. Very short periods may indicate stellar binary."
     },
     {
       "rank": 13,
-      "feature_name": "koi_prad",
-      "importance_score": 0.0,
-      "astrophysical_meaning": "Planetary radius in Earth radii. Values > 15 suggest stellar companion, not planet."
-    },
-    {
-      "rank": 14,
-      "feature_name": "koi_eccen",
-      "importance_score": 0.0,
+      "feature_name": "koi_count",
+      "importance_score": 0.01759332327978125,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
+      "rank": 14,
+      "feature_name": "koi_impact",
+      "importance_score": 0.010721903244682971,
+      "astrophysical_meaning": "Impact parameter. Values > 1 are physically impossible for transits."
+    },
+    {
       "rank": 15,
-      "feature_name": "koi_model_snr",
-      "importance_score": 0.0,
-      "astrophysical_meaning": "Signal-to-noise ratio of the transit model fit. Higher SNR = more reliable detection."
+      "feature_name": "koi_teq",
+      "importance_score": 0.009579636478845754,
+      "astrophysical_meaning": "Equilibrium temperature. Extremely high values suggest stellar companion."
     },
     {
       "rank": 16,
-      "feature_name": "koi_num_transits",
-      "importance_score": 0.0,
+      "feature_name": "koi_incl",
+      "importance_score": 0.009150724804331377,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 17,
-      "feature_name": "koi_max_sngle_ev",
-      "importance_score": 0.0,
+      "feature_name": "koi_num_transits",
+      "importance_score": 0.008746356987442618,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 18,
-      "feature_name": "koi_max_mult_ev",
-      "importance_score": 0.0,
+      "feature_name": "koi_smet",
+      "importance_score": 0.008466399255551796,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 19,
-      "feature_name": "koi_fpflag_nt",
-      "importance_score": 0.0,
-      "astrophysical_meaning": "Not Transit-like flag. Non-zero indicates the signal shape doesn't match a planet transit."
+      "feature_name": "koi_duration",
+      "importance_score": 0.008065464112367828,
+      "astrophysical_meaning": "Transit duration in hours. Planets have short, consistent durations."
     },
     {
       "rank": 20,
-      "feature_name": "koi_fpflag_ss",
-      "importance_score": 0.0,
-      "astrophysical_meaning": "Stellar Eclipse flag. Non-zero indicates secondary eclipse detected (binary star)."
+      "feature_name": "koi_sma",
+      "importance_score": 0.007948613018061166,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 21,
-      "feature_name": "koi_fpflag_co",
-      "importance_score": 0.0,
+      "feature_name": "koi_insol",
+      "importance_score": 0.007645899912227615,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 22,
-      "feature_name": "koi_kepmag",
-      "importance_score": 0.0,
+      "feature_name": "koi_srho",
+      "importance_score": 0.006756264697585164,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 23,
-      "feature_name": "koi_dor",
-      "importance_score": 0.0,
+      "feature_name": "koi_srad",
+      "importance_score": 0.004327836651080461,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 24,
-      "feature_name": "koi_srho",
-      "importance_score": 0.0,
-      "astrophysical_meaning": "Astrophysical feature contributing to classification"
-    },
-    {
-      "rank": 25,
       "feature_name": "koi_steff",
-      "importance_score": 0.0,
+      "importance_score": 0.004055242702701323,
       "astrophysical_meaning": "Stellar effective temperature. Helps assess transit plausibility for given star type."
     },
     {
-      "rank": 26,
+      "rank": 25,
       "feature_name": "koi_slogg",
-      "importance_score": 0.0,
+      "importance_score": 0.004034449265532395,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 26,
+      "feature_name": "koi_smass",
+      "importance_score": 0.003694141587511618,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 27,
-      "feature_name": "koi_smet",
-      "importance_score": 0.0,
+      "feature_name": "koi_kepmag",
+      "importance_score": 0.0033669121409646346,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 28,
-      "feature_name": "koi_srad",
+      "feature_name": "koi_ingress",
       "importance_score": 0.0,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     },
     {
       "rank": 29,
-      "feature_name": "koi_smass",
+      "feature_name": "koi_eccen",
       "importance_score": 0.0,
       "astrophysical_meaning": "Astrophysical feature contributing to classification"
     }

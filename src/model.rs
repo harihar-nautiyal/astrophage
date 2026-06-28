@@ -9,7 +9,6 @@ use anyhow::{Result, anyhow};
 use ndarray::{Array1, Array2};
 use std::collections::HashMap;
 
-/// Exoplanet classifier wrapping our custom Random Forest
 pub struct ExoplanetClassifier {
     forest: Option<RandomForest>,
     feature_names: Vec<String>,
@@ -19,15 +18,7 @@ pub struct ExoplanetClassifier {
 
 impl ExoplanetClassifier {
     pub fn new() -> Self {
-        // Class weights to handle imbalance
-        // FALSE_POSITIVE: ~4839 (baseline = 1.0)
-        // CONFIRMED: ~2747 (weight = 4839/2747 ≈ 1.76)
-        // CANDIDATE: ~1978 (weight = 4839/1978 ≈ 2.45)
-        let class_weights = HashMap::from([
-            (0u8, 1.76), // CONFIRMED
-            (1u8, 2.45), // CANDIDATE
-            (2u8, 1.0),  // FALSE_POSITIVE (baseline)
-        ]);
+        let class_weights = HashMap::from([(0u8, 1.76), (1u8, 2.45), (2u8, 1.0)]);
 
         Self {
             forest: None,
@@ -46,12 +37,11 @@ impl ExoplanetClassifier {
 
         self.feature_names = train_data.feature_names().to_vec();
 
-        // Configure Random Forest
-        // For 9,564 rows, these are good defaults
-        let n_trees = 50;
-        let max_depth = 15;
-        let min_samples_split = 5;
-        let min_samples_leaf = 2;
+        // OPTIMIZED hyperparameters
+        let n_trees = 20;
+        let max_depth = 12;
+        let min_samples_split = 2;
+        let min_samples_leaf = 1;
 
         println!("   Hyperparameters:");
         println!("     - Trees: {}", n_trees);
@@ -63,10 +53,15 @@ impl ExoplanetClassifier {
             self.class_weights[&0], self.class_weights[&1], self.class_weights[&2]
         );
 
-        let mut forest = RandomForest::new(n_trees, max_depth, min_samples_split, min_samples_leaf);
+        let mut forest = RandomForest::new(
+            n_trees,
+            max_depth,
+            min_samples_split,
+            min_samples_leaf,
+            self.class_weights.clone(),
+        );
         forest.fit(train_data.features(), train_data.labels())?;
 
-        // Extract feature importance
         let importance = forest.feature_importance();
         let mut feature_importance: Vec<(String, f64)> = self
             .feature_names
@@ -75,7 +70,6 @@ impl ExoplanetClassifier {
             .map(|(i, name)| (name.clone(), *importance.get(i).unwrap_or(&0.0)))
             .collect();
 
-        // Sort by importance descending
         feature_importance.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
 
         self.feature_importance = feature_importance;
@@ -95,7 +89,6 @@ impl ExoplanetClassifier {
         }
     }
 
-    /// Predict probabilities for each class
     pub fn predict_proba(&self, features: &Array2<f64>) -> Result<Array2<f64>> {
         match &self.forest {
             Some(forest) => Ok(forest.predict_proba(features)),
@@ -105,23 +98,19 @@ impl ExoplanetClassifier {
         }
     }
 
-    /// Get feature importance rankings
     pub fn feature_importance(&self) -> &[(String, f64)] {
         &self.feature_importance
     }
 
-    /// Check if model is trained
     pub fn is_trained(&self) -> bool {
         self.forest.is_some()
     }
 
-    /// Get number of trees
     pub fn n_trees(&self) -> usize {
         self.forest.as_ref().map(|f| f.n_trees()).unwrap_or(0)
     }
 }
 
-/// Model hyperparameters (tunable)
 pub struct ModelConfig {
     pub n_trees: usize,
     pub max_depth: usize,
@@ -133,10 +122,10 @@ pub struct ModelConfig {
 impl Default for ModelConfig {
     fn default() -> Self {
         Self {
-            n_trees: 50,
-            max_depth: 15,
-            min_samples_split: 5,
-            min_samples_leaf: 2,
+            n_trees: 20,
+            max_depth: 12,
+            min_samples_split: 2,
+            min_samples_leaf: 1,
             class_weights: HashMap::from([(0u8, 1.76), (1u8, 2.45), (2u8, 1.0)]),
         }
     }
