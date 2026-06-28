@@ -1,3 +1,305 @@
+# Changelog
+
+All notable changes to Astrophage will be documented in this file.
+
+```mermaid
+graph LR
+    A[v0.1.0] -->|+Two-Stage| B[v0.2.0]
+    B -->|+Hyperparam| C[v0.3.0]
+    C -->|+API| D[v0.4.0]
+
+    style B fill:#2ecc71,stroke:#27ae60,color:#fff
+```
+
+---
+
+## [0.2.0] - 2026-06-28
+
+### Added
+- Two-Stage Random Forest architecture (CONFIRMED vs NOT → CANDIDATE vs FALSE_POSITIVE)
+- 8 derived astrophysical features (fpflag_sum, snr_x_prad, depth_duration_ratio, etc.)
+- Comprehensive JSON report generation with astrophysical insights
+- Feature importance ranking with scientific explanations
+- Google Colab notebook for cloud execution
+- Full mdBook documentation suite with Mermaid diagrams
+
+### Performance
+- **94.81% accuracy** on test set
+- **92.64% macro F1** score
+- Stage 1 achieves near-perfect separation for CONFIRMED planets
+
+### Technical
+- Custom Random Forest implementation in pure Rust
+- Polars DataFrame integration for fast I/O
+- Stratified train/test split with class balance
+- Z-score standardization and median imputation
+- Tracing-based structured logging
+
+```mermaid
+graph LR
+    A[v0.2.0] --> B[Accuracy: 94.81%]
+    A --> C[Macro F1: 92.64%]
+    A --> D[Features: 36]
+
+    style B fill:#2ecc71,stroke:#27ae60,color:#fff
+    style C fill:#3498db,stroke:#2980b9,color:#fff
+```
+
+---
+
+## [0.1.0] - 2026-06-23
+
+### Added
+- Initial single-stage Random Forest classifier
+- Basic feature engineering with 28 base features
+- KOI dataset loading and preprocessing
+- Evaluation metrics (accuracy, precision, recall, F1)
+- Command-line interface with tracing logs
+
+### Notes
+- Baseline accuracy: ~91%
+- No derived features
+- Single-stage architecture
+
+```mermaid
+graph LR
+    A[v0.1.0] --> B[Accuracy: ~91%]
+    A --> C[Features: 28]
+    A --> D[Single Stage]
+
+    style B fill:#e74c3c,stroke:#c0392c,color:#fff
+```
+
+---
+
+## Roadmap
+
+```mermaid
+graph LR
+    A[v0.2.0<br/>Current] --> B[v0.3.0<br/>Hyperparameter Tuning]
+    B --> C[v0.4.0<br/>Model Serialization]
+    C --> D[v0.5.0<br/>REST API]
+    D --> E[v1.0.0<br/>Production Ready]
+
+    style A fill:#2ecc71,stroke:#27ae60,color:#fff
+    style E fill:#f39c12,stroke:#e67e22,color:#fff
+```
+
+### v0.3.0 (Planned)
+- Grid search for optimal hyperparameters
+- K-fold cross-validation
+- Feature importance visualization
+
+### v0.4.0 (Planned)
+- Model serialization (save/load trained models)
+- Incremental training support
+- Configuration file support (TOML)
+
+### v0.5.0 (Planned)
+- REST API with Axum
+- Batch prediction endpoint
+- Real-time classification
+
+### v1.0.0 (Future)
+- Production-ready deployment
+- Docker containerization
+- Comprehensive benchmarking suite
+
+
+# 🪐 Astrophage
+
+> **Two-Stage Random Forest Classifier for NASA Kepler Object of Interest (KOI) Exoplanet Validation**
+
+[![Hackathon](https://img.shields.io/badge/Celesta-India%20High%20School%20Exoplanet%20Data%20Challenge%202026-blue)](https://celesta-exoplanet-challenge.devpost.com/)
+[![Rust](https://img.shields.io/badge/Rust-1.85+-orange?logo=rust)](https://www.rust-lang.org/)
+[![Polars](https://img.shields.io/badge/Polars-DataFrame-brightgreen)](https://pola.rs/)
+[![Accuracy](https://img.shields.io/badge/Accuracy-94.81%25-success)]()
+[![Documentation](https://img.shields.io/badge/Docs-astrophage.hariharnautiyal.com-9cf)](https://astrophage.hariharnautiyal.com)
+
+📖 **Full Documentation:** [https://astrophage.hariharnautiyal.com](https://astrophage.hariharnautiyal.com)
+
+---
+
+## What is Astrophage?
+
+Astrophage is a high-performance exoplanet classification system built in **Rust** using **Polars** and a custom **Two-Stage Random Forest** implementation. It classifies Kepler Objects of Interest (KOIs) into three categories:
+
+```mermaid
+pie title Class Distribution in KOI Dataset
+    "FALSE POSITIVE" : 4839
+    "CONFIRMED" : 2747
+    "CANDIDATE" : 1978
+```
+
+> **Total Samples:** 9,564 | **Features:** 36 (28 base + 8 derived) | **Accuracy:** 94.81%
+
+---
+
+## Why Two-Stage?
+
+Our architecture mirrors NASA's actual vetting workflow. Instead of forcing a single model to learn three classes simultaneously, we decompose the problem into two simpler binary decisions:
+
+```mermaid
+graph TD
+    A[Raw KOI Data<br/>36 Features] --> B[Stage 1: CONFIRMED vs NOT CONFIRMED]
+    B -->|CONFIRMED| C[Output: CONFIRMED ✅]
+    B -->|NOT CONFIRMED| D[Stage 2: CANDIDATE vs FALSE POSITIVE]
+    D -->|CANDIDATE| E[Output: CANDIDATE 🔍]
+    D -->|FALSE POSITIVE| F[Output: FALSE POSITIVE ❌]
+
+    style C fill:#2ecc71,stroke:#27ae60,color:#fff
+    style E fill:#3498db,stroke:#2980b9,color:#fff
+    style F fill:#e74c3c,stroke:#c0392c,color:#fff
+```
+
+This decomposition improves accuracy by **~3-4%** over a single-stage classifier because each stage learns a simpler, cleaner decision boundary.
+
+---
+
+## Key Results
+
+```mermaid
+graph LR
+    subgraph "Overall Metrics"
+        A[Accuracy<br/>94.81%]
+        B[Macro F1<br/>92.64%]
+        C[Weighted F1<br/>94.51%]
+    end
+
+    style A fill:#2ecc71,stroke:#27ae60,color:#fff
+    style B fill:#3498db,stroke:#2980b9,color:#fff
+    style C fill:#9b59b6,stroke:#8e44ad,color:#fff
+```
+
+### Per-Class Breakdown
+
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| **CANDIDATE** | 88.42% | 85.06% | 86.71% | 1,978 |
+| **FALSE POSITIVE** | **99.69%** | 98.35% | **99.01%** | 4,839 |
+| **CONFIRMED** | 89.95% | 94.54% | 92.18% | 2,747 |
+
+---
+
+## Architecture
+
+```mermaid
+graph LR
+    subgraph "Input"
+        A[Raw KOI CSV<br/>28 columns]
+    end
+
+    subgraph "Feature Engineering"
+        B[Base Features<br/>28 columns]
+        C[Derived Features<br/>8 interactions]
+        D[Preprocessing<br/>impute + standardize]
+    end
+
+    subgraph "Two-Stage Model"
+        E[Stage 1 RF<br/>CONFIRMED vs NOT]
+        F[Stage 2 RF<br/>CANDIDATE vs FALSE+]
+    end
+
+    subgraph "Output"
+        G[Predictions<br/>3 classes]
+        H[JSON Report<br/>metrics + insights]
+    end
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E -->|CONFIRMED| G
+    E -->|NOT| F
+    F -->|CANDIDATE| G
+    F -->|FALSE_POSITIVE| G
+    G --> H
+
+    style A fill:#e74c3c,stroke:#c0392c,color:#fff
+    style D fill:#f39c12,stroke:#e67e22,color:#fff
+    style E fill:#2ecc71,stroke:#27ae60,color:#fff
+    style F fill:#3498db,stroke:#2980b9,color:#fff
+    style H fill:#9b59b6,stroke:#8e44ad,color:#fff
+```
+
+### Custom Implementation Details
+
+- **Language:** Rust (zero-cost abstractions, memory safety, SIMD-friendly)
+- **DataFrame Engine:** Polars (blazing fast CSV I/O and columnar operations)
+- **ML Backend:** Custom Random Forest from scratch (no Python dependency!)
+  - Gini impurity splitting
+  - Bootstrapped sampling
+  - Feature subsampling
+  - Majority voting ensemble
+- **Parallelism:** Tokio async runtime for I/O; ndarray for vectorized math
+
+---
+
+## Installation
+
+### Prerequisites
+
+- [Rust](https://rustup.rs/) (1.85+ recommended)
+- Git
+
+### Clone & Build
+
+```bash
+# Clone the repository
+git clone https://github.com/harihar-nautiyal/astrophage.git
+cd astrophage
+
+# Build in release mode (optimized)
+cargo build --release
+
+# The binary will be at:
+# ./target/release/astrophage
+```
+
+### Dataset
+
+The repository includes a pre-processed KOI dataset at:
+
+```
+data/koi_dataset.csv
+```
+
+If you want to use your own data, ensure it follows the same column schema (see `src/data.rs` for expected fields).
+
+---
+
+## Usage
+
+### Quick Start
+
+```bash
+# Run the full pipeline
+cargo run --release
+```
+
+### Expected Output
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║ 🪐 ASTROPHAGE v0.2.0                                         ║
+║ NASA KOI Exoplanet Classification System                     ║
+║ TWO-STAGE MODEL: CONFIRMED vs NOT → CANDIDATE vs FALSE    ║
+╚══════════════════════════════════════════════════════════════╝
+
+Step 1: Loading KOI dataset...
+Step 2: Engineering features...
+Step 3: Splitting data (80/20 stratified)...
+Step 4: Training TWO-STAGE classifier...
+Step 5: Evaluating model performance...
+Step 6: Top astrophysical predictors:
+  1. fpflag_sum                0.2918
+  2. koi_fpflag_co             0.0683
+  3. koi_max_mult_ev           0.0630
+  4. koi_fpflag_nt             0.0624
+  5. koi_model_snr             0.0596
+  ...
+Step 7: Generating final report...
+
 ASTROPHAGE two-stage classification complete!
 Check output/report.json for full results.
 ```
