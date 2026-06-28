@@ -1,10 +1,4 @@
-//! Report generation for Astrophage
-//!
-//! Generates JSON reports with:
-//! - Evaluation metrics
-//! - Feature importance rankings
-//! - Model configuration
-//! - Astrophysical interpretation
+//! Report generation for Astrophage, generates JSON report with evaluation metrics, feature importance, and astrophysical insights
 
 use crate::evaluation::EvaluationMetrics;
 use crate::two_stage_model::TwoStageClassifier;
@@ -26,6 +20,7 @@ pub struct AstrophageReport {
     pub recommendations: Vec<String>,
 }
 
+/// Summary of the report
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Summary {
     pub total_samples: usize,
@@ -35,6 +30,7 @@ pub struct Summary {
     pub model_type: String,
 }
 
+/// Metrics report
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MetricsReport {
     pub accuracy: f64,
@@ -43,6 +39,7 @@ pub struct MetricsReport {
     pub per_class: HashMap<String, ClassMetrics>,
 }
 
+/// Class metrics
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ClassMetrics {
     pub precision: f64,
@@ -50,6 +47,7 @@ pub struct ClassMetrics {
     pub f1_score: f64,
 }
 
+/// Importance of features
 #[derive(Serialize, Deserialize, Debug)]
 pub struct FeatureImportance {
     pub rank: usize,
@@ -58,6 +56,7 @@ pub struct FeatureImportance {
     pub astrophysical_meaning: String,
 }
 
+/// Astrophysical insights
 #[derive(Serialize, Deserialize, Debug)]
 pub struct AstrophysicalInsight {
     pub insight: String,
@@ -74,7 +73,7 @@ pub fn generate_report(
 
     let mut report = AstrophageReport {
         project_name: "Astrophage".to_string(),
-        version: "0.2.0".to_string(),
+        version: "0.1.0".to_string(),
         hackathon: "Celesta - India High School Exoplanet Data Challenge 2026".to_string(),
         model_type: "Two-Stage Random Forest".to_string(),
         summary: Summary {

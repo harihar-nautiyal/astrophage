@@ -1,10 +1,4 @@
-//! Custom Decision Tree and Random Forest — OPTIMIZED
-//!
-//! Key optimizations:
-//! 1. Limit thresholds to 20 per feature (not every unique value)
-//! 2. Early stopping when all labels are identical
-//! 3. Reduced default trees (20) for faster iteration
-//! 4. Progress indicators
+//! Custom Decision Tree and Random Forest
 
 use anyhow::Result;
 use ndarray::{Array1, Array2};

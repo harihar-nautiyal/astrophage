@@ -1,3 +1,5 @@
+//! Tracing logger setup and configuration
+
 use tracing_appender::rolling::{RollingFileAppender, Rotation};
 use tracing_subscriber::{filter::LevelFilter, fmt, prelude::*, registry::Registry};
 

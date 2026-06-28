@@ -1,9 +1,4 @@
 //! Model evaluation for exoplanet classification
-//!
-//! Computes:
-//! - Accuracy, Precision, Recall, F1-Score
-//! - Confusion Matrix
-//! - Per-class metrics
 
 use crate::features::ProcessedDataset;
 use crate::two_stage_model::TwoStageClassifier;

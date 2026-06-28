@@ -1,3 +1,7 @@
+//! Main entry point for the Astrophage exoplanet classification model
+//! please use google collab notebook if you are having trouble running this locally
+//! read rust docs if you want to know working behind astrophage
+
 use astrophage::{
     data::KoiDataset, evaluation::ModelEvaluator, features::FeatureEngineer, logger::Logger,
     report::generate_report, two_stage_model::TwoStageClassifier,

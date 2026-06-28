@@ -1,6 +1,4 @@
-//! Astrophage
-//! A Rust based machine learning pipeline for classifying Kepler Objects of Interest
-//! into CONFIRMED, CANDIDATE, or FALSE POSITIVE categories
+//! Astrophage - Model for classifying Kepler Objects of Interest by Harihar Nautiyal
 
 pub mod data;
 pub mod decision_tree;

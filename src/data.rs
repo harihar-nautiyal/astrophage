@@ -5,6 +5,7 @@ use ndarray::{Array1, Array2};
 use std::collections::HashMap;
 use tracing::info;
 
+// KOI dataset imported from provided file
 pub struct KoiDataset {
     pub features: Array2<f64>,
     pub labels: Array1<u8>,
