@@ -131,28 +131,17 @@
   "astrophysical_insights": [
     {
       "insight": "Two-stage classification separates the easy decision (CONFIRMED vs not) from the hard decision (CANDIDATE vs FALSE_POSITIVE). This mirrors NASA's actual vetting workflow.",
-      "supporting_features": [
-        "fpflag_sum",
-        "koi_model_snr"
-      ],
+      "supporting_features": ["fpflag_sum", "koi_model_snr"],
       "confidence": "Very High"
     },
     {
       "insight": "Signal-to-noise ratio (koi_model_snr) combined with planetary radius (snr_x_prad) is a powerful discriminator. Real planets have consistent SNR for their size.",
-      "supporting_features": [
-        "koi_model_snr",
-        "snr_x_prad",
-        "koi_prad"
-      ],
+      "supporting_features": ["koi_model_snr", "snr_x_prad", "koi_prad"],
       "confidence": "High"
     },
     {
       "insight": "False positive flags (fpflag_sum, koi_fpflag_nt, koi_fpflag_ss) directly encode NASA's pre-vetting. When these are non-zero, the signal is almost certainly not a planet.",
-      "supporting_features": [
-        "fpflag_sum",
-        "koi_fpflag_nt",
-        "koi_fpflag_ss"
-      ],
+      "supporting_features": ["fpflag_sum", "koi_fpflag_nt", "koi_fpflag_ss"],
       "confidence": "Very High"
     },
     {

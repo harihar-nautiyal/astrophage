@@ -1,0 +1,28 @@
+[book]
+title = "Astrophage Documentation"
+authors = ["Harihar Nautiyal"]
+description = "Two-Stage Random Forest for NASA KOI Exoplanet Classification"
+language = "en"
+src = "src"
+
+[build]
+build-dir = "book"
+
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
+
+[output.html]
+default-theme = "latte"
+preferred-dark-theme = "mocha"
+git-repository-url = "https://github.com/harihar-nautiyal/astrophage"
+edit-url-template = "https://github.com/harihar-nautiyal/astrophage/edit/main/docs/{path}"
+additional-js = ["mermaid.min.js", "mermaid-init.js"]
+additional-css = ["./theme/catppuccin.css"]
+
+[output.html.playground]
+editable = true
+line-numbers = true
+
+[output.html.search]
+limit-results = 20
+teaser-word-count = 30
