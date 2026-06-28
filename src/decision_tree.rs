@@ -5,8 +5,10 @@
 use crate::features::ProcessedDataset;
 use anyhow::{Result, anyhow};
 use ndarray::{Array1, Array2};
+use rand::RngExt;
 use rand::seq::SliceRandom;
 use std::collections::HashMap;
+use tracing::info;
 
 /// A single node in the decision tree
 #[derive(Debug, Clone)]
@@ -381,15 +383,15 @@ impl RandomForest {
         self.feature_importance = vec![0.0; self.n_features];
 
         let n_samples = features.nrows();
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
 
-        println!("   Growing {} trees...", self.n_trees);
+        info!("Growing {} trees...", self.n_trees);
 
         for i in 0..self.n_trees {
             // Bootstrap sample
             let mut indices: Vec<usize> = Vec::with_capacity(n_samples);
             for _ in 0..n_samples {
-                indices.push(rng.gen_range(0..n_samples));
+                indices.push(rng.random_range(0..n_samples));
             }
 
             // Create subsampled feature set for this tree (feature bagging)
@@ -414,7 +416,7 @@ impl RandomForest {
             self.trees.push(tree);
 
             if (i + 1) % 10 == 0 || i == 0 {
-                println!("     Tree {}/{} grown", i + 1, self.n_trees);
+                info!("Tree {}/{} grown", i + 1, self.n_trees);
             }
         }
 

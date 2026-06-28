@@ -19,7 +19,7 @@ impl KoiDataset {
 
         let df = CsvReadOptions::default()
             .with_has_header(true)
-            .try_into_reader_with_file_path(Some("docs/assets/data/path.csv".into()))
+            .try_into_reader_with_file_path(Some("data/koi_dataset.csv".into()))
             .unwrap()
             .finish()
             .unwrap();
@@ -92,10 +92,7 @@ impl KoiDataset {
 
         let feature_df = DataFrame::new_infer_height(casted_columns)?;
 
-        let features_fortran: Array2<f64> =
-            feature_df.to_ndarray::<Float64Type>(IndexOrder::Fortran)?;
-
-        let features = features_fortran.t().to_owned();
+        let features: Array2<f64> = feature_df.to_ndarray::<Float64Type>(IndexOrder::C)?;
 
         println!(
             "Feature matrix: {} × {}",

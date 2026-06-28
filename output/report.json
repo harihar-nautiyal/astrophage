@@ -1,0 +1,247 @@
+{
+  "project_name": "Astrophage",
+  "version": "0.1.0",
+  "hackathon": "Celesta - India High School Exoplanet Data Challenge 2026",
+  "summary": {
+    "total_samples": 24,
+    "n_features": 0,
+    "n_classes": 3,
+    "class_distribution": {
+      "CANDIDATE": 1978,
+      "CONFIRMED": 2747,
+      "FALSE_POSITIVE": 4839
+    },
+    "model_type": "Random Forest"
+  },
+  "metrics": {
+    "accuracy": 0.4583333333333333,
+    "macro_f1": 0.20952380952380953,
+    "weighted_f1": 0.39285714285714285,
+    "per_class": {
+      "CONFIRMED": {
+        "precision": 0.55,
+        "recall": 0.7333333333333333,
+        "f1_score": 0.6285714285714286
+      },
+      "CANDIDATE": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0
+      },
+      "FALSE_POSITIVE": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0
+      }
+    }
+  },
+  "feature_importance": [
+    {
+      "rank": 1,
+      "feature_name": "koi_count",
+      "importance_score": 0.15479411145427768,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 2,
+      "feature_name": "koi_duration",
+      "importance_score": 0.12801493144497833,
+      "astrophysical_meaning": "Transit duration in hours. Planets have short, consistent durations."
+    },
+    {
+      "rank": 3,
+      "feature_name": "koi_period",
+      "importance_score": 0.125224179534321,
+      "astrophysical_meaning": "Orbital period in days. Very short periods may indicate stellar binary."
+    },
+    {
+      "rank": 4,
+      "feature_name": "koi_insol",
+      "importance_score": 0.12177482285447022,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 5,
+      "feature_name": "koi_teq",
+      "importance_score": 0.11122132792135392,
+      "astrophysical_meaning": "Equilibrium temperature. Extremely high values suggest stellar companion."
+    },
+    {
+      "rank": 6,
+      "feature_name": "koi_ingress",
+      "importance_score": 0.09462652363661217,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 7,
+      "feature_name": "koi_depth",
+      "importance_score": 0.0905514771663508,
+      "astrophysical_meaning": "Fractional flux decrease during transit. Planets have small, consistent depths; binaries have large, variable depths."
+    },
+    {
+      "rank": 8,
+      "feature_name": "koi_fpflag_ec",
+      "importance_score": 0.07644050070281742,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 9,
+      "feature_name": "koi_incl",
+      "importance_score": 0.039088054310141306,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 10,
+      "feature_name": "koi_sma",
+      "importance_score": 0.03734435791650219,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 11,
+      "feature_name": "koi_impact",
+      "importance_score": 0.015862761333346326,
+      "astrophysical_meaning": "Impact parameter. Values > 1 are physically impossible for transits."
+    },
+    {
+      "rank": 12,
+      "feature_name": "koi_ror",
+      "importance_score": 0.0050569517248285276,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 13,
+      "feature_name": "koi_prad",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Planetary radius in Earth radii. Values > 15 suggest stellar companion, not planet."
+    },
+    {
+      "rank": 14,
+      "feature_name": "koi_eccen",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 15,
+      "feature_name": "koi_model_snr",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Signal-to-noise ratio of the transit model fit. Higher SNR = more reliable detection."
+    },
+    {
+      "rank": 16,
+      "feature_name": "koi_num_transits",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 17,
+      "feature_name": "koi_max_sngle_ev",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 18,
+      "feature_name": "koi_max_mult_ev",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 19,
+      "feature_name": "koi_fpflag_nt",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Not Transit-like flag. Non-zero indicates the signal shape doesn't match a planet transit."
+    },
+    {
+      "rank": 20,
+      "feature_name": "koi_fpflag_ss",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Stellar Eclipse flag. Non-zero indicates secondary eclipse detected (binary star)."
+    },
+    {
+      "rank": 21,
+      "feature_name": "koi_fpflag_co",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 22,
+      "feature_name": "koi_kepmag",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 23,
+      "feature_name": "koi_dor",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 24,
+      "feature_name": "koi_srho",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 25,
+      "feature_name": "koi_steff",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Stellar effective temperature. Helps assess transit plausibility for given star type."
+    },
+    {
+      "rank": 26,
+      "feature_name": "koi_slogg",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 27,
+      "feature_name": "koi_smet",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 28,
+      "feature_name": "koi_srad",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    },
+    {
+      "rank": 29,
+      "feature_name": "koi_smass",
+      "importance_score": 0.0,
+      "astrophysical_meaning": "Astrophysical feature contributing to classification"
+    }
+  ],
+  "astrophysical_insights": [
+    {
+      "insight": "Signal-to-noise ratio (koi_model_snr) is the strongest discriminator between real planets and false positives. High SNR transits with consistent depth and duration are most likely CONFIRMED.",
+      "supporting_features": [
+        "koi_model_snr",
+        "koi_depth",
+        "koi_duration"
+      ],
+      "confidence": "High"
+    },
+    {
+      "insight": "False positive flags (koi_fpflag_nt, koi_fpflag_ss) directly encode vetting decisions. When these flags are non-zero, the signal has already been identified as non-planetary by NASA's pipeline.",
+      "supporting_features": [
+        "koi_fpflag_nt",
+        "koi_fpflag_ss"
+      ],
+      "confidence": "Very High"
+    },
+    {
+      "insight": "Planetary radius (koi_prad) and equilibrium temperature (koi_teq) provide physical plausibility checks. Objects larger than ~15 Earth radii or hotter than ~5000K are likely stellar companions, not planets.",
+      "supporting_features": [
+        "koi_prad",
+        "koi_teq"
+      ],
+      "confidence": "High"
+    }
+  ],
+  "recommendations": [
+    "Focus follow-up observations on KOIs with high koi_model_snr (>20) and koi_prad between 0.5-15 Earth radii.",
+    "Immediately deprioritize KOIs with koi_fpflag_nt > 0 or koi_fpflag_ss > 0.",
+    "Investigate CANDIDATE KOIs with koi_impact < 1 and consistent transit durations for potential confirmation.",
+    "Consider binary classification (CONFIRMED vs FALSE_POSITIVE) for higher accuracy, using CANDIDATE as a separate holdout set."
+  ]
+}
