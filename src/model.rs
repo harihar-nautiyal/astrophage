@@ -38,8 +38,8 @@ impl ExoplanetClassifier {
         self.feature_names = train_data.feature_names().to_vec();
 
         // OPTIMIZED hyperparameters
-        let n_trees = 20;
-        let max_depth = 12;
+        let n_trees = 50;
+        let max_depth = 15;
         let min_samples_split = 2;
         let min_samples_leaf = 1;
 
