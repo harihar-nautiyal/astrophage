@@ -21,6 +21,12 @@ pub struct TwoStageClassifier {
     feature_importance: Vec<(String, f64)>,
 }
 
+impl Default for TwoStageClassifier {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TwoStageClassifier {
     pub fn new() -> Self {
         Self {

@@ -14,6 +14,12 @@ pub struct ExoplanetClassifier {
     class_weights: HashMap<u8, f64>,
 }
 
+impl Default for ExoplanetClassifier {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ExoplanetClassifier {
     pub fn new() -> Self {
         let class_weights = HashMap::from([(0u8, 1.76), (1u8, 2.45), (2u8, 1.0)]);

@@ -157,6 +157,12 @@ pub struct FeatureEngineer {
     feature_stds: Vec<f64>,
 }
 
+impl Default for FeatureEngineer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl FeatureEngineer {
     pub fn new() -> Self {
         Self {
